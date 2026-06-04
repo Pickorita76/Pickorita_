@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</button>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pickorita Handicrafts</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+<header>
+    <div class="logo">🌸 PICKORITA HANDICRAFTS 🌸</div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+    <button class="cart-icon" onclick="toggleCart()">
+    🛒 Cart (<span id="cart-count">0</span>)
+</button>
+</header>
+
+<section class="hero">
+    <div class="overlay">
+        <h1>Handmade With Love ❤️</h1>
+        <p>Unique Handmade Crafts For Every Occasion</p>
+        <a href="https://instagram.com/Pickorita_" class="btn" target="_blank">
+            Visit Instagram
+        </a>
+        <a href="https://instagram.com/Pickorita_" target="_blank" class="instagram-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+</a>
+
+
+    </div>
+</section>
+<section class="owner-section">
+
+    <div class="owner-container">
+
+        <div class="owner-image">
+            <img src="FIRST.jpeg" alt="Jiya - Founder of Pickorita Handicrafts">
+        </div>
+
+        <div class="owner-content">
+            <span class="owner-tag">🌸 Meet The Creator 🌸</span>
+
+            <h2>Hello, I'm Jiya 💕</h2>
+
+            <p>
+                Welcome to Pickorita Handicrafts! ✨
+                I'm Jiya, the creator behind every handmade piece you see here.
+                I love turning simple materials into beautiful creations that bring joy, warmth, and smiles.
+            </p>
+
+            <p>
+                Pickorita was born from my passion for art, creativity, and handmade craftsmanship.
+                Every product is designed with care, patience, and lots of love to make your special moments even more memorable. 🎀
+            </p>
+
+            <p>
+                Thank you for supporting my small business and being part of this creative journey. Your love and support inspire me to keep creating beautiful things every day. 🌷
+            </p>
+
+            <a href="https://instagram.com/Pickorita_" target="_blank" class="owner-btn">
+                Follow Jiya's Journey ✨
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="categories">
+
+    <h2>Our Categories</h2>
+
+    <div class="category-container">
+
+        <div class="category-card">
+            <span>🎁</span>
+            <h3>Gift Hampers</h3>
+        </div>
+
+        <div class="category-card">
+            <span>🧸</span>
+            <h3>Customized Crafts</h3>
+        </div>
+
+        <div class="category-card">
+            <span>💌</span>
+            <h3>Greeting Cards</h3>
+        </div>
+
+        <div class="category-card">
+            <span>🏠</span>
+            <h3>Home Decor</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="card">
+        <h2>🎨 Handmade</h2>
+        <p>Every item is carefully crafted by hand.</p>
+    </div>
+
+    <div class="card">
+        <h2>🎁 Custom Gifts</h2>
+        <p>Personalized gifts for your loved ones.</p>
+    </div>
+
+    <div class="card">
+        <h2>✨ Premium Quality</h2>
+        <p>Made using quality materials and creativity.</p>
+    </div>
+
+</section>
+
+<section class="gallery">
+
+    <h2>Our Creations</h2>
+
+    <div class="product-grid">
+
+    <div class="product-card">
+        <img src="FOURTH.jpeg">
+
+        <div class="product-info">
+            <h3>Rose Keychain</h3>
+            <p>₹199</p>
+
+            <button onclick="addToCart('Rose Keychain',199)">
+                Add to Cart
+            </button>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+    
+</section>
+
+<!DOCTYPE html>
+<html>
+<head>
+...
+</head>
+<body>
+...
+</body>
+</html>
+<body>
+
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar">
+        <h2>Your Cart</h2>
+
+        <div id="cart-items"></div>
+
+        <h3>Total: ₹<span id="total">0</span></h3>
+
+        <button onclick="checkoutUPI()">
+            Pay Now
+        </button>
+    </div>
+
+    <script>
+
+let cart = [];
+
+function toggleCart(){
+    document.getElementById("cartSidebar")
+    .classList.toggle("active");
+}
+
+function addToCart(name,price){
+
+    const existing = cart.find(item => item.name === name);
+
+    if(existing){
+        existing.qty++;
+    }else{
+        cart.push({
+            name:name,
+            price:price,
+            qty:1
+        });
+    }
+
+    renderCart();
+}
+
+function increase(index){
+    cart[index].qty++;
+    renderCart();
+}
+
+function decrease(index){
+
+    cart[index].qty--;
+
+    if(cart[index].qty <= 0){
+        cart.splice(index,1);
+    }
+
+    renderCart();
+}
+
+function removeItem(index){
+    cart.splice(index,1);
+    renderCart();
+}
+
+function renderCart(){
+
+    let html = "";
+    let total = 0;
+    let count = 0;
+
+    cart.forEach((item,index)=>{
+
+        total += item.price * item.qty;
+        count += item.qty;
+
+        html += `
+        <div class="cart-item">
+
+            <h4>${item.name}</h4>
+
+            <p>₹${item.price}</p>
+
+            <div class="qty-box">
+
+                <button onclick="decrease(${index})">-</button>
+
+                <span>${item.qty}</span>
+
+                <button onclick="increase(${index})">+</button>
+
+            </div>
+
+            <button class="remove-btn"
+            onclick="removeItem(${index})">
+            ❌
+            </button>
+
+        </div>
+        `;
+    });
+
+    document.getElementById("cart-items").innerHTML = html;
+
+    document.getElementById("total").textContent = total;
+
+    document.getElementById("cart-count").textContent = count;
+}
+
+function checkoutUPI(){
+
+    let total = 0;
+
+    cart.forEach(item=>{
+        total += item.price * item.qty;
+    });
+
+    const upi =
+    "upi://pay?pa=jiya123@paytm&pn=Pickorita&am="
+    + total +
+    "&cu=INR";
+
+    window.location.href = upi;
+}
+
+</script>
+    <script>
+        // Your cart code
+    </script>
+
+</body>
+</html>
+
+<section class="reviews">
+
+    <h2>What Our Customers Say</h2>
+
+    <div class="review-container">
+
+        <div class="review-card">
+            <p>
+                "Absolutely beautiful handmade products.
+                The detailing was amazing!"
+            </p>
+            <h4>⭐⭐⭐⭐⭐</h4>
+            <span>- Ayesha</span>
+        </div>
+
+        <div class="review-card">
+            <p>
+                "Perfect gift for my best friend.
+                Highly recommended!"
+            </p>
+            <h4>⭐⭐⭐⭐⭐</h4>
+            <span>- Simran</span>
+        </div>
+
+        <div class="review-card">
+            <p>
+                "The quality exceeded my expectations.
+                Loved every detail."
+            </p>
+            <h4>⭐⭐⭐⭐⭐</h4>
+            <span>- Priya</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<footer>
+    <p>© 2026 Pickorita Handicrafts | Handmade with Love ❤️</p>
+</footer>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Pickorita Handicrafts</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+
+
+</body>
+</html>
